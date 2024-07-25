@@ -6,7 +6,7 @@ import "./Search.css";
 
 const API_URL =
   "https://api.themoviedb.org/3/search/movie?api_key=d3449ff6ec0c027623bf6b6f5fff78b3&language=en-US&page=1&include_adult=false";
- const Search = () => {
+const Search = () => {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [searchList, setSearchList] = useState([]);
 
@@ -33,10 +33,16 @@ const API_URL =
   };
 
   useEffect(() => {
-        fetchSearchList();
+    const time = setTimeout(() => {
+      fetchSearchList();
+      console.log('mounding.');
+    }, 400);
+
+    return () => {
+      clearTimeout(time);
+      console.log("Un Mounding");
+    };
   }, [searchInputValue]);
-
-
 
   return (
     <div className="search-container">
@@ -58,5 +64,4 @@ const API_URL =
   );
 };
 
-
-export default Search
+export default Search;
